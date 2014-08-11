@@ -1,0 +1,38 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+# CentOS 6.4
+#   To change, replace with URL to a diff box. Keep in mind that much of the puppet 
+#   configuration depends on Cent 6, so you may need to make other changes if you
+#   stray too far from that.
+#
+# Puppet
+#   - install needed puppet modules in /vagrant/modules
+#   - add manifests or modify default.p in /vagrant/manifests
+#
+# Port forwarding 
+#   You can access port 80 on the test vm by navigating to localhost:7778.  This can
+#   be configured as you like, with additional or changed ports.
+#
+# Folder Sharing
+#   The top path of the repo is mounted to /root/python-number-to-string-dev  This
+#   allows you to manipulate files using tools in your host OS while allowing the
+#   changes to be seen within the VM.  Keep in mind that Virtualbox doesn't 
+#   support all common file operations (such as links) in shared folders.
+
+PROJECT_NAME = 'python-number-to-string-dev'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :dev do |dev|
+    dev.vm.box = PROJECT_NAME
+    dev.vm.box_url = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20131103.box'
+    dev.vm.provision 'puppet' do |puppet|
+        # puppet.module_path = 'modules' # uncomment if you add modules
+    end
+    dev.vm.network 'forwarded_port', guest: 80, host:7778
+    dev.vm.hostname = PROJECT_NAME
+    dev.vm.synced_folder "../", "/root/" + PROJECT_NAME, owner: 'root', group: 'root'
+  end
+
+end

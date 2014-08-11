@@ -1,0 +1,213 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-11 02:34+0000\n"
+"PO-Revision-Date: 2014-08-11 02:34+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: NumberToString/NumberToString.py:45
+msgid "thousand"
+msgstr ""
+
+#: NumberToString/NumberToString.py:45
+msgid "million"
+msgstr ""
+
+#: NumberToString/NumberToString.py:46
+msgid "billion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:46
+msgid "trillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:46
+msgid "quadrillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:47
+msgid "quintillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:47
+msgid "sextillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:47
+msgid "septillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:48
+msgid "octillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:48
+msgid "nonillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:48
+msgid "decillion"
+msgstr ""
+
+#: NumberToString/NumberToString.py:51
+msgid "one"
+msgstr ""
+
+#: NumberToString/NumberToString.py:51
+msgid "two"
+msgstr ""
+
+#: NumberToString/NumberToString.py:51
+msgid "three"
+msgstr ""
+
+#: NumberToString/NumberToString.py:51
+msgid "four"
+msgstr ""
+
+#: NumberToString/NumberToString.py:52
+msgid "five"
+msgstr ""
+
+#: NumberToString/NumberToString.py:52
+msgid "six"
+msgstr ""
+
+#: NumberToString/NumberToString.py:52
+msgid "seven"
+msgstr ""
+
+#: NumberToString/NumberToString.py:52
+msgid "eight"
+msgstr ""
+
+#: NumberToString/NumberToString.py:53
+msgid "nine"
+msgstr ""
+
+#: NumberToString/NumberToString.py:53
+msgid "ten"
+msgstr ""
+
+#: NumberToString/NumberToString.py:53
+msgid "eleven"
+msgstr ""
+
+#: NumberToString/NumberToString.py:53
+msgid "twelve"
+msgstr ""
+
+#: NumberToString/NumberToString.py:54
+msgid "thirteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:54
+msgid "fourteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:54
+msgid "fifteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:54
+msgid "sixteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:55
+msgid "seventeen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:55
+msgid "eighteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:55
+msgid "nineteen"
+msgstr ""
+
+#: NumberToString/NumberToString.py:55
+msgid "twenty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:56
+msgid "thirty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:56
+msgid "forty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:56
+msgid "fifty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:56
+msgid "sixty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:57
+msgid "seventy"
+msgstr ""
+
+#: NumberToString/NumberToString.py:57
+msgid "eighty"
+msgstr ""
+
+#: NumberToString/NumberToString.py:57
+msgid "ninety"
+msgstr ""
+
+#: NumberToString/NumberToString.py:57
+msgid "hundred"
+msgstr ""
+
+#: NumberToString/NumberToString.py:67
+msgid "grouping"
+msgstr ""
+
+#: NumberToString/NumberToString.py:70
+msgid "group_sep"
+msgstr ""
+
+#: NumberToString/NumberToString.py:73
+msgid "hundreds_sep"
+msgstr ""
+
+#: NumberToString/NumberToString.py:76
+msgid "hundreds_tens_sep"
+msgstr ""
+
+#: NumberToString/NumberToString.py:79
+msgid "tens_ones_sep"
+msgstr ""
+
+#: NumberToString/NumberToString.py:81
+msgid "negative"
+msgstr ""
+
+#: NumberToString/NumberToString.py:85
+msgid "n_sign_posn"
+msgstr ""
+
+#: NumberToString/NumberToString.py:87
+msgid "positive"
+msgstr ""
+
+#: NumberToString/NumberToString.py:91
+msgid "p_sign_posn"
+msgstr ""
+
+#: NumberToString/NumberToString.py:94
+msgid "sentence_termination"
+msgstr ""
