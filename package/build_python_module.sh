@@ -12,13 +12,18 @@ then
     exit -1
 fi
 
-MODULE_DIR="$1"
-if [[ "$MODULE_DIR" == "." ]]
-then
-    MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
-else
-    MODULE_NAME=$(basename $MODULE_DIR)
-fi
+MODULE_DIR="$(readlink -f $1)/"
+MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
+#if [[ "$MODULE_DIR" == "./" ]]
+#then
+#    MODULE_DIR="$(readlink -f $MODULE_DIR)/"
+#    MODULE_NAME=$(basename $MODULE_DIR)
+#else
+#    MODULE_NAME=$(basename $MODULE_DIR)
+#fi
+
+echo $MODULE_DIR
+echo $MODULE_NAME
 
 # 1. Copy source module directory to /tmp/<tempname>
 #    Since virtual box does not support link creation in shared directories,
@@ -27,7 +32,7 @@ fi
 WORK_DIR=$(mktemp -d)
 cd $WORK_DIR
 LOG_FILE=$(mktemp --tmpdir=.)
-echo "rsync -av $MODULE_DIR $WORK_DIR" >> $LOG_FILE 2>&1
+echo "rsync -av $MODULE_DIR/ $WORK_DIR/" >> $LOG_FILE 2>&1
 rsync -av $MODULE_DIR $WORK_DIR >> $LOG_FILE 2>&1
 echo "cd $WORK_DIR" >> $LOG_FILE 2>&1
 
