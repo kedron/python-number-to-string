@@ -4,7 +4,7 @@ import shlex
 import sys
 import unittest
 from NumberToString import NumberToStringMachine, NUMBER_MAX
-from pkg_resources import resource_string
+from pkg_resources import resource_string, resource_listdir
 
 locale = 'en_US'
 
@@ -17,9 +17,12 @@ class NumberToStringTestCase(unittest.TestCase):
         self.testcases = resource_string(__name__, self.locale + '.testcases') 
         self.translator = NumberToStringMachine(self.locale)
         self.logger.debug(self.testcases)
+    # END setUp()
+
 
     def tearDown(self):
         pass
+
 
     def test_locale(self):
         for testcase in self.testcases.splitlines():
@@ -40,9 +43,18 @@ class NumberToStringTestCase(unittest.TestCase):
             self.assertEqual(test_translation, answer, 
                              msg="%s (%s)\n\tExpected: '%s'\n\tReceived: '%s'\n" % 
                                  (test_name, self.locale, answer, test_translation))
+    # END test_locale()
+# END class NumberToStringTestCase
 
 
-if __name__ == '__main__':
+def list_installed_locales():
+    dirlist = resource_listdir(__name__, '.')
+    locale_files = filter(lambda f: f.endswith('.testcases') , dirlist)
+    return map (lambda l: l[:-10], locale_files)
+# END list_installed_locales()
+
+
+def main():
     # Setup logging
     logging.basicConfig(stream=sys.stderr)
     logging.getLogger("NumberToStringTests").setLevel(logging.INFO)
@@ -60,4 +72,10 @@ if __name__ == '__main__':
     main_argv = [sys.argv[0]] 
     if args.verbosity:
         main_argv.append('-v')
-    unittest.main(argv=main_argv)
+    unittest.main(argv=main_argv, exit=False)
+    # END main()
+
+
+if __name__ == '__main__':
+    main()
+

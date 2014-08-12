@@ -14,6 +14,7 @@ setup(
     packages=['NumberToString', 'NumberToString/tests'],
     package_data = {
         'NumberToString' : ['share/*/LC_MESSAGES/*.mo'],  # Compiled message catalogs
+        'NumberToString/tests' : ['*.testcases'],  # Compiled message catalogs
     },
     exclude_package_data = {
         '' : ['*.po', '*.pot'], # Non-compiled message catalogs
