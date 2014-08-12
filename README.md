@@ -49,10 +49,10 @@ The project suffers from the following limitations:
     * Only works for languages that count using groupings of thousands.  Languages
       such as Hindi which group using lakhs (100,000) and crores (10,000,000) are 
       not currently supported.
-    * I've arbitrarily set a number limit of 1,000 decillion, just to minimize the
+    * I've arbitrarily set a number limit of 1,000 decillion -1, just to minimize the
       amount of translation necessary.
     * Currently, project has only been tested in my local environment (OS X Mavericks,
-      CentOS 7 running on a virtual box VM under Vagrant 1.6.3, python 2.7).
+      CentOS 7 running on a Virtual Box VM under Vagrant 1.6.3, python 2.7).
     * Currently, project has only been tested on languages using latin-derived characters 
       (although utf-8 is the charset used).
 
@@ -77,6 +77,7 @@ The project consists of the following resources (ordered by repo structure):
             - cmd/ - command-line script to translate numbers to text    
             - flask/ - REST API for translating numbers to text
             - html/ - simple ajax form for using REST API
+            - run_unit_tests/ - runs unit tests (duh!)
         - deploy/ - code and configurations for deploying code to various environments
             - vagrant/ - code to auto-deploy a working local test environment using virtualbox VMs
         - lib/ - underlying algorithmic implementations used by applications
@@ -100,14 +101,14 @@ Instructions for creating a development environment
 5. Deploy the Virtual Box VM. See python-number-to-string/deploy/vagrant/Vagrantfile for any
    config variables you may want to change.
 
-    > $ cd python-number-to-string/deploy/vagrant
-    > $ vagrant box add vagrant box add developervms/centos7-64
-    > (go take a coffee break)
-    > $ vagrant up
-    > (go take another coffee break.  When you get back, ignore the puppet warnings)
-    > $ vagrant ssh
-    > $ sudo su -
-    > # cd python-number-to-string
+     $ cd python-number-to-string/deploy/vagrant
+     $ vagrant box add vagrant box add developervms/centos7-64
+     (go take a coffee break)
+     $ vagrant up
+     (go take another coffee break.  When you get back, ignore the puppet warnings)
+     $ vagrant ssh
+     $ sudo su -
+     # cd python-number-to-string
 
 6. Vagrant has deployed a CentOS 7 vm with all of the dependencies you need to develop and
    test.  It has also mounted the top-level repo directory in /root/python-number-to-string
@@ -116,18 +117,20 @@ Instructions for creating a development environment
    
 7. Next, let's build and install the NumberToString python module.  
 
-    > # cd package
-    > # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
-    > Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
+     # cd package
+     # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
+     Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
 
    This script will build and package all code and related-resources needed and create an 
    installable module in the lib/NumberToString/dist sub-directory.  This module can then 
    be installed using pip or another module installer: 
 
-    > # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86\_64.tar.gz
+     # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86\_64.tar.gz
 
 8. Now, we can use the command-line application:
 
-    > # cd /root/python-number-to-string-dev/app/cmd
-    > # python number-to-string.py 123
-    > one hundred and twenty-three.
+     # cd /root/python-number-to-string-dev/app/cmd
+     # python number-to-string.py 123
+     one hundred and twenty-three.
+
+9. We can also run the test suite:

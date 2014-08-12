@@ -2,18 +2,8 @@
 Converts a number to an English String.  For example:
 
 > number-to-string 120
-> one hundred twenty
+> one hundred and twenty.
 
-Constraints:
-    - number is base 10
-    - number can be negative
-
-Basic algorithm
-
-# 1. Build hash tables
-# 1. Parse Command-line arguments, store input number into 'number' var
-# 2. Determine sign of number
-# 3. Use the Math.log function to determine how large the number is (# of digits)
 """
 
 import gettext
@@ -22,7 +12,7 @@ import sys
 from pkg_resources import resource_filename
 
 # I don't feel like translating beyond the decillion range, so setting an arbitrary limit
-NUMBER_MAX = 100000000000000000000000000000000000
+NUMBER_MAX = 999999999999999999999999999999999999
 
 class NumberToStringMachine(object):
 
@@ -155,12 +145,18 @@ class NumberToStringMachine(object):
 
         1. Special case - Zero
         2. Determine sign of the number
-         Add sign indicator
-         Add sentence terminator
+        3. Special case - over NUMBER_MAX, under -NUMBER_MAX
+        4. Iterate over each numeric group, building a list of sub-translations that will be 
+           combined together at the end for the full translation.
+        5. Add sign indicator
+        6. Add sentence terminator
         """
-        result = ""
 
         # 1. Special case - Zero
+        if number == 0:
+            full_translation = self.messages['locale_data']['zero']
+            full_translation += self.messages['locale_data']['sentence_termination']
+            return full_translation
 
         # 2. Determine sign of number
         if (number < 0):
@@ -169,21 +165,26 @@ class NumberToStringMachine(object):
         else:
             negative = False
 
-        # 5. Iterate over each numeric group, building a list of sub-translations that will be 
+        # 3. Special case - over NUMBER_MAX, under -NUMBER_MAX
+        if (number > NUMBER_MAX):
+            raise OverflowError
+
+        # 4. Iterate over each numeric group, building a list of sub-translations that will be 
         #    combined together at the end for the full translation.
         groups = [] 
         current_group = 0
         while number > 0:
             group_translation = self.translate_group(number % self.dec_group_size)     
-            if self.messages['magnitudes'][current_group]:
-                group_translation += self.messages['locale_data']['cardinal_magnitude_sep'] + \
-                                     self.messages['magnitudes'][current_group]
-            groups.insert(0, group_translation)
+            if group_translation:
+                if self.messages['magnitudes'][current_group]:
+                    group_translation += self.messages['locale_data']['cardinal_magnitude_sep'] + \
+                                         self.messages['magnitudes'][current_group]
+                groups.insert(0, group_translation)
             number /= self.dec_group_size
             current_group += self.log_group_size
         full_translation = self.messages['locale_data']['group_sep'].join(groups)
 
-        # Add sign indicator
+        # 5. Add sign indicator
         if (negative):
             if self.messages['locale_data']['n_sign_posn'] == 'beginning':
                 full_translation = self.messages['locale_data']['negative'] + full_translation
@@ -195,7 +196,7 @@ class NumberToStringMachine(object):
             elif self.messages['locale_data']['p_sign_posn'] == 'end':
                 full_translation += self.messages['locale_data']['positive']
 
-        # Add sentence terminator
+        # 6. Add sentence terminator
         full_translation += self.messages['locale_data']['sentence_termination']
 
         return full_translation
