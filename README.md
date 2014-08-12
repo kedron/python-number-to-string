@@ -7,17 +7,26 @@ language-agnostic as possible, allowing for translations to several languages.
 LIMITATIONS
 -----------
 The project suffers from the following limitations:
+
     * Only works for languages that count using groupings of thousands.  Languages
       such as Hindi which group using lakhs (100,000) and crores (10,000,000) are 
       not currently supported.
     * I've arbitrarily set a number limit of 1,000 decillion, just to minimize the
       amount of translation necessary.
     * Currently, project has only been tested in my local environment (OS X Mavericks,
-      CentOS 6 running on a virtual box VM under Vagrant 1.6.3, python 2.6)
+      CentOS 6 running on a virtual box VM under Vagrant 1.6.3, python 2.6).
+    * Currently, project has only been tested on languages using latin-derived characters 
+      (although utf-8 is the charset used).
 
 Future Improvements
 -------------------
+
     * deployment scripts to staging and production environments
+    * server-side git hook to run style-check and test suite on every checkout
+    * verify functionality on CentOS 7, Ubuntu 12/14 and Debian 6/7
+    * verify functionality on python 2.7 and 3.4
+    * verify functionality for non-latin languages and charsets
+    * Add support for (mostly South-Asian) languages not using a thousands grouping
 
 Project Components
 ------------------
@@ -33,6 +42,7 @@ The project consists of the following resources (ordered by repo structure):
         - vagrant/ - code to auto-deploy a working local test environment using virtualbox VMs
     - lib/ - underlying algorithmic implementations used by applications
         - NumberToString/ - python module implementing number-to-string algorithm 
+            - NumberToString.py - code implementing the base algorithm
             - NumberToString/i18n/ - message catalogs implementing different languages
             - tests/ - unit tests for NumberToString module
     - package/ - build scripts for building and packaging artifacts
@@ -57,9 +67,16 @@ Instructions for creating a development environment
    test.  It has also mounted the top-level repo directory in /root/python-number-to-string
    This allows you to work with files using your preferred tools in the OS X environment, while
    any changes made are seen inside the VM.  
-7. Let's build the NumberToString python module.  
+7. Let's build and installthe NumberToString python module.  
 
     # cd package
     # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
+    Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
 
-   The build script should have dumped 
+   This script will build and package all code and related-resources needed and create an 
+   installable module in the lib/NumberToString/dist sub-directory.  This module can then 
+   be installed using pip or another module installer: 
+
+    # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86_64.tar.gz
+
+8. 
