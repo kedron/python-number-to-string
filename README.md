@@ -110,7 +110,7 @@ Instructions for creating a development environment
          (When you get back, there will be some warnings from puppet you can safely ignore)
          $ vagrant ssh
          $ sudo su -
-         # cd python-number-to-string
+         # cd python-number-to-string-dev
 
 6. Vagrant has deployed a CentOS 7 vm with all of the dependencies you need to develop and
    test.  It has also mounted the top-level repo directory in /root/python-number-to-string
@@ -127,7 +127,7 @@ Instructions for creating a development environment
    installable module in the lib/NumberToString/dist sub-directory.  This module can then 
    be installed using pip or another module installer: 
 
-         # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86\_64.tar.gz
+         # pip install <path to tar.gz file from above>
 
 8. Now, we can use the command-line application:
 
