@@ -1,0 +1,55 @@
+INFO       2014-08-12 09:11:06,702 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:11:06,705 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:11:07,015 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:11:07,017 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:15:31,993 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:15:31,995 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:16:13,709 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:16:13,712 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:16:31,323 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:16:31,325 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:16:36,090 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:16:36,090 NumberToStringAPI              get_translation                      118 : KeyError(u'enasdfsdf_CA',)
+INFO       2014-08-12 09:17:17,005 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:17:17,007 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:18:29,874 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:18:29,876 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:19:41,754 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:19:41,756 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:19:45,650 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:19:45,650 NumberToStringAPI              get_translation                      119 : KeyError(u'enasdfsdf_CA',)
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1836, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1820, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1403, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/python-number-to-string-dev/app/flask/NumberToStringAPI.py", line 131, in get_translation
+    ) + \
+UnboundLocalError: local variable 'status' referenced before assignment
+INFO       2014-08-12 09:19:59,389 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:19:59,391 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:20:02,585 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:20:02,586 NumberToStringAPI              get_translation                      119 : KeyError(u'enasdfsdf_CA',)
+INFO       2014-08-12 09:20:21,665 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:20:21,666 NumberToStringAPI              get_translation                      123 : OverflowError()
+INFO       2014-08-12 09:21:18,361 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:21:18,363 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:21:41,863 NumberToStringAPI              __init__                             58  : START NumberToStringAPI
+INFO       2014-08-12 09:21:41,865 NumberToStringAPI              loadRoutes                           76  : Entered loadRoutes
+INFO       2014-08-12 09:21:43,722 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:21:43,722 NumberToStringAPI              get_translation                      123 : OverflowError()
+INFO       2014-08-12 09:22:27,592 NumberToStringAPI              get_translation                      95  : Entered get_translation
+ERROR      2014-08-12 09:22:27,593 NumberToStringAPI              get_translation                      123 : OverflowError()
+INFO       2014-08-12 09:24:09,096 NumberToStringAPI              get_translation                      95  : Entered get_translation

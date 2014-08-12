@@ -1,15 +1,9 @@
 # Convenience packages installed on all servers.  TODO: move these to a common module
-package { [ 'vim-enhanced', 'openssh-clients', 'mlocate', 'bind-utils' ]:
+package { [ 'vim-enhanced', 'openssh-clients', 'mlocate', 'bind-utils', 'lynx', 'rsync' ]:
     ensure  => present,
 }
 
 # Project Specific Packages and Configuration
-
-# python-tools - installs pygettext.py and msgfmt.py used to build message catalogs from python source.
-# gettext - GNU i18n/l10n utilities - useful for building message catalogs from non-python source.
-#package { [ 'python-tools', 'gettext', 'centos-release-SCL']:
-#    ensure      => present,
-#}
 
 # Epel repo is needed for pip
 package { 'epel':
@@ -31,4 +25,14 @@ package { [ 'babel', 'flask' ]:
     ensure      => present,
     provider    => pip,
     require     => Package['python-pip'],
+}
+
+# httpd for the ajax form
+package { 'httpd':
+    ensure      => present,
+}
+service { 'httpd':
+    ensure      => running,
+    enable      => true,
+    require     => Package['httpd']
 }

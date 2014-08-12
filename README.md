@@ -159,3 +159,23 @@ Instructions for creating a development environment
          Ran 1 test in 0.011s
          
          OK
+
+10.  Moving on, there's also a REST API:
+
+         # cd /root/python-number-to-string-dev/app/flask
+         # nohup python app.py &
+         # curl localhost:5000/number_to_string/v0.1/translation/en_US/123
+         {"status": "SUCCESS", "result": "one hundred and twenty-three."}
+         # curl localhost:5000/number_to_string/v0.1/translation/en_CA/123
+         {"status": "SUCCESS", "result": "one hundred and twenty-three, eh?"}
+         # curl localhost:5000/number_to_string/v0.1/translation/en_US/123?pretty=true
+         <pre>{
+             "result": "one hundred and twenty-three.",
+             "status": "SUCCESS"
+         }</pre>
+         # curl lo12748931274893127489213749231847231987432ation/en_CA/12383745890137489312748931
+         {"status": "FAILURE", "result": "OverflowError: %d is too large to translate"}
+         # curl localhost:5000/number_to_string/v0.1/translation/enasdfsdf_CA/123
+         {"status": "FAILURE", "result": "invalid locale"}
+
+11. There was also going to be a simple ajax form that calls the REST API, but I ran out of time.  Sorry!
