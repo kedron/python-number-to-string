@@ -1,8 +1,46 @@
 python-number-to-string
 =======================
+
 python-number-to-string is a project that implements the translation of an integer
 number into its corresponding natural language translation.  It attempts to be as 
 language-agnostic as possible, allowing for translations to several languages.
+
+Basic Algorithm
+---------------
+
+The difficulty of the task of natural language translation of numbers is that the
+translation is only semi-regularized.  There are some patterns we can deduce and
+write and algorithm code for, such as the tendency of most languages to group large 
+numbers by every 3 decimal orders of magnitude (although as we'll see there are 
+some exceptions).  Other aspects of the translation are not regular at all and 
+are different for every language.  Thus, one must find a way to model the unique
+aspects of each language in a data structure while encapsulating the common patterns 
+into code.
+
+I have chosen to store the unique parts of each language into a set of hash tables
+which I then query during translation.  The data for each language includes names
+of numbers, characters used to separate numerical values, punctuation, and a few
+special cases.  Some of this data is similar to that available in a traditional
+locale database.  Unfortunately, locale databases do not contain the complete and 
+exact data I need, so I could not simply use what already exists.
+
+Instead, I am using a portion of the locale model, LC\_MESSAGES, to implement my 
+database.  For each locale, I build a dictionary of values which are transformed
+using python's gettext module.  Thus, all I need to do to add a language is to copy 
+my locale source file, and translate each necessary string.  The locale sources
+are automatically compiled into python-readable .mo files during the build process
+and made available to my program.
+
+Given a locale hash, I then only need to implement a few simple tasks for translating
+a number:
+
+    1. Write a function that translates a number between 1 and 999.  This is done
+       using the hash table along with a few regularized rules.
+    2. Iterate over every 3 orders of magnitude (base 10), building a string as
+       we go.
+    3. Add any opening/closing flourishes, as necessary.
+
+To find out more, check out the algorithm at lib/NumberToString/NumberToString/NumberToString.py
 
 LIMITATIONS
 -----------
@@ -62,14 +100,14 @@ Instructions for creating a development environment
 5. Deploy the Virtual Box VM. See python-number-to-string/deploy/vagrant/Vagrantfile for any
    config variables you may want to change.
 
->    $ cd python-number-to-string/deploy/vagrant
->    $ vagrant box add vagrant box add developervms/centos7-64
->    (go take a coffee break)
->    $ vagrant up
->    (go take another coffee break.  When you get back, ignore the puppet warnings)
->    $ vagrant ssh
->    $ sudo su -
->    # cd python-number-to-string
+    > $ cd python-number-to-string/deploy/vagrant
+    > $ vagrant box add vagrant box add developervms/centos7-64
+    > (go take a coffee break)
+    > $ vagrant up
+    > (go take another coffee break.  When you get back, ignore the puppet warnings)
+    > $ vagrant ssh
+    > $ sudo su -
+    > # cd python-number-to-string
 
 6. Vagrant has deployed a CentOS 7 vm with all of the dependencies you need to develop and
    test.  It has also mounted the top-level repo directory in /root/python-number-to-string
@@ -78,18 +116,18 @@ Instructions for creating a development environment
    
 7. Next, let's build and install the NumberToString python module.  
 
->    # cd package
->    # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
->    Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
+    > # cd package
+    > # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
+    > Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
 
    This script will build and package all code and related-resources needed and create an 
    installable module in the lib/NumberToString/dist sub-directory.  This module can then 
    be installed using pip or another module installer: 
 
->    # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86\_64.tar.gz
+    > # pip install /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.linux-x86\_64.tar.gz
 
 8. Now, we can use the command-line application:
 
->    # cd /root/python-number-to-string-dev/app/cmd
->    # python number-to-string.py 123
->    one hundred and twenty-three.
+    > # cd /root/python-number-to-string-dev/app/cmd
+    > # python number-to-string.py 123
+    > one hundred and twenty-three.
