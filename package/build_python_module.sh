@@ -13,7 +13,7 @@ then
 fi
 
 MODULE_DIR="$1"
-MODULE_NAME=$(basename $MODULE_DIR)
+MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
 
 # 1. Copy source module directory to /tmp/<tempname>
 #    Since virtual box does not support link creation in shared directories,
@@ -22,8 +22,8 @@ MODULE_NAME=$(basename $MODULE_DIR)
 WORK_DIR=$(mktemp -d)
 cp -r $MODULE_DIR $WORK_DIR
 cd $WORK_DIR
-LOG_FILE=$(mktemp)
-echo cd $WORK_DIR > $LOG_FILE 2>&1
+LOG_FILE=$(mktemp --tmpdir=.)
+echo "cd $WORK_DIR" >> $LOG_FILE 2>&1
 
 # 2. Compile all message catalogs - Find all .po files in the module source
 #    tree, use setuptools/babel integration to compile them to .mo catalogs
@@ -33,14 +33,16 @@ do
     directory=$(dirname $i)
     basename=$(basename $i)
     localename=${basename%.po}
-    mkdir -p $MODULE_NAME/share/$localename/LC_MESSAGES > $LOG_FILE 2>&1
+    echo "+mkdir -p $MODULE_NAME/share/$localename/LC_MESSAGES" >> $LOG_FILE 2>&1
+    mkdir -p $MODULE_NAME/share/$localename/LC_MESSAGES >> $LOG_FILE 2>&1
     if [[ $? != 0 ]]
     then
         echo "An Error occurred: mkdir -p command failed"
         cat $LOG_FILE
         exit -1
     fi
-    python setup.py compile_catalog --input-file $i --locale $localename --domain $MODULE_NAME --directory $MODULE_NAME/share > $LOG_FILE 2>&1
+    echo "+python setup.py compile_catalog --input-file $i --locale $localename --domain $MODULE_NAME --directory $MODULE_NAME/share" >> $LOG_FILE 2>&1 
+    python setup.py compile_catalog --input-file $i --locale $localename --domain $MODULE_NAME --directory $MODULE_NAME/share >> $LOG_FILE 2>&1
     if [[ $? != 0 ]]
     then
         echo "An Error occurred: compile_catalog command failed"
@@ -50,7 +52,8 @@ do
 done
 
 # 3. Run the sdist command to build a package
-python setup.py sdist > $LOG_FILE 2>&1
+echo "python setup.py sdist" >> $LOG_FILE 2>&1
+python setup.py -v sdist >> $LOG_FILE 2>&1
 if [[ $? != 0 ]]
 then
     echo "Alas! An Error occurred: sdist command failed"

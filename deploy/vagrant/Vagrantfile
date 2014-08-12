@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# CentOS 6.4
+# CentOS 7
 #   To change, replace with URL to a diff box. Keep in mind that much of the puppet 
-#   configuration depends on Cent 6, so you may need to make other changes if you
+#   configuration depends on Cent 7, so you may need to make other changes if you
 #   stray too far from that.
 #
 # Puppet
@@ -25,8 +25,9 @@ PROJECT_NAME = 'python-number-to-string-dev'
 Vagrant.configure("2") do |config|
 
   config.vm.define :dev do |dev|
-    dev.vm.box = PROJECT_NAME
-    dev.vm.box_url = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20131103.box'
+    dev.vm.box = 'developervms/centos7-64'
+    #dev.vm.box = PROJECT_NAME
+    #dev.vm.box_url = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20131103.box'
     dev.vm.provision 'puppet' do |puppet|
         # puppet.module_path = 'modules' # uncomment if you add modules
     end

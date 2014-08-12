@@ -11,7 +11,7 @@ setup(
     url = "https://github.com/kedron/python-number-to-string",
     description = ("Convert a number to a localized string representation of that number."),
     license = "BSD",
-    packages=['NumberToString'],
+    packages=['NumberToString', 'NumberToString/tests'],
     package_data = {
         'NumberToString' : ['share/*/LC_MESSAGES/*.mo'],  # Compiled message catalogs
     },

@@ -5,11 +5,12 @@
 from getopt import getopt
 import sys
 
-from NumberToString import NumberToStringMachine
+import NumberToString
 
 # Command-line Usage
 def print_usage():
     print 'USAGE: python-number-to-string <number-to-convert>'
+
 trash, args = getopt(sys.argv[1:], '')
 
 # Sanity Check
@@ -22,5 +23,5 @@ except ValueError:
     print_usage()
     exit(-1)
 
-machine = NumberToStringMachine()
+machine = NumberToString.NumberToStringMachine()
 print machine.translate(number)

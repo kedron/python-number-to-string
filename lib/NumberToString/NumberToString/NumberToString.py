@@ -19,12 +19,12 @@ Basic algorithm
 import gettext
 import math
 import sys
+from pkg_resources import resource_filename
 
 # I don't feel like translating beyond the decillion range, so setting an arbitrary limit
 NUMBER_MAX = 100000000000000000000000000000000000
 
 class NumberToStringMachine(object):
-
 
     def __init__(self, locale='en_US'):
         self.module_name = 'NumberToString'
@@ -38,6 +38,7 @@ class NumberToStringMachine(object):
         kwargs = {}
         if locale:
             kwargs['languages'] = [locale]
+            kwargs['localedir'] = resource_filename(__name__, 'share')
         translations = gettext.translation(self.module_name, **kwargs)
         self.setup_message_hashes(translations)
     # END load_locale()
