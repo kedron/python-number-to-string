@@ -159,6 +159,12 @@ Instructions for creating a development environment
          Ran 1 test in 0.011s
          
          OK
+         # python run-unit-tests.py --locale=en_US
+         .
+         ----------------------------------------------------------------------
+         Ran 1 test in 0.029s
+
+         OK
 
 10.  Moving on, there's also a REST API:
 
