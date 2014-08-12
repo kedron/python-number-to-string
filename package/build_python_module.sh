@@ -13,16 +13,22 @@ then
 fi
 
 MODULE_DIR="$1"
-MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
+if [[ "$MODULE_DIR" == "." ]]
+then
+    MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
+else
+    MODULE_NAME=$(basename $MODULE_DIR)
+fi
 
 # 1. Copy source module directory to /tmp/<tempname>
 #    Since virtual box does not support link creation in shared directories,
 #    we have to copy the module directory to /tmp before unleashing setuptools
 #    on it.
 WORK_DIR=$(mktemp -d)
-cp -r $MODULE_DIR $WORK_DIR
 cd $WORK_DIR
 LOG_FILE=$(mktemp --tmpdir=.)
+echo "rsync -av $MODULE_DIR $WORK_DIR" >> $LOG_FILE 2>&1
+rsync -av $MODULE_DIR $WORK_DIR >> $LOG_FILE 2>&1
 echo "cd $WORK_DIR" >> $LOG_FILE 2>&1
 
 # 2. Compile all message catalogs - Find all .po files in the module source

@@ -105,7 +105,9 @@ Instructions for creating a development environment
          $ vagrant box add vagrant box add developervms/centos7-64
          (go take a coffee break)
          $ vagrant up
-         (go take another coffee break.  When you get back, ignore the puppet warnings)
+         (go take another coffee break)  
+         (and check your email)
+         (When you get back, there will be some warnings from puppet you can safely ignore)
          $ vagrant ssh
          $ sudo su -
          # cd python-number-to-string
@@ -118,7 +120,7 @@ Instructions for creating a development environment
 7. Next, let's build and install the NumberToString python module.  
 
          # cd package
-         # ./build_python_module.sh /root/python-number-to-string/lib/NumberToString
+         # ./build_python_module.sh /root/python-number-to-string-dev/lib/NumberToString
          Congratulations! Your package has been built to /tmp/tmp.dijDXpVEwK/dist/NumberToString-0.0.1.tar.gz
 
    This script will build and package all code and related-resources needed and create an 
