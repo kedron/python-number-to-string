@@ -36,3 +36,12 @@ service { 'httpd':
     enable      => true,
     require     => Package['httpd']
 }
+file { '/var/www/html/index.html':
+    ensure      => file, 
+    source      => '/root/python-number-to-string-dev/app/html/index.html',
+    require     => Package['httpd']
+}
+service { 'firewalld':
+    ensure      => stopped,
+    enable      => false,
+}

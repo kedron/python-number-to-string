@@ -13,7 +13,7 @@ if __name__ == '__main__':
     try:
         api = NumberToStringAPI.NumberToStringAPI(flask)
         api.loadRoutes()
-        flask.run(host='0.0.0.0', debug = True)
+        flask.run(host='0.0.0.0', debug = False)
     except Exception as e:
         print "Encountered unexpected Exception %r" % e
         exit(-1)

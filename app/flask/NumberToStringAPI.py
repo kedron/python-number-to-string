@@ -11,6 +11,7 @@ import sys
 # 3rd Party Modules
 from flask import request
 from flask import abort
+from flask import make_response
 
 # Codero Modules
 import NumberToString
@@ -128,12 +129,15 @@ class NumberToStringAPI():
             result = "UNKNOWN ERROR: %r" % e
             status = 'FAILURE'
 
-        return pretty_print_html_begin + \
+        response_str =  pretty_print_html_begin + \
                json.dumps({ 'status' : status,
                             'result' : result,
                           }, **pretty_print
                ) + \
                pretty_print_html_end
+        response = make_response(response_str)
+        response.headers['Access-Control-Allow-Origin'] = "*"
+        return response
     # END get_addresses()
 
 

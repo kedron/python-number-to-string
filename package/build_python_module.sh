@@ -22,9 +22,6 @@ MODULE_NAME=$(basename $(readlink -f $MODULE_DIR))
 #    MODULE_NAME=$(basename $MODULE_DIR)
 #fi
 
-echo $MODULE_DIR
-echo $MODULE_NAME
-
 # 1. Copy source module directory to /tmp/<tempname>
 #    Since virtual box does not support link creation in shared directories,
 #    we have to copy the module directory to /tmp before unleashing setuptools

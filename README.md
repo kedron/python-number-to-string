@@ -170,6 +170,8 @@ Instructions for creating a development environment
 
          # cd /root/python-number-to-string-dev/app/flask
          # nohup python app.py &
+         # tail -f nohup.out
+         (open another terminal window, ssh into the vagrant instance)
          # curl localhost:5000/number_to_string/v0.1/translation/en_US/123
          {"status": "SUCCESS", "result": "one hundred and twenty-three."}
          # curl localhost:5000/number_to_string/v0.1/translation/en_CA/123
@@ -184,4 +186,8 @@ Instructions for creating a development environment
          # curl localhost:5000/number_to_string/v0.1/translation/enasdfsdf_CA/123
          {"status": "FAILURE", "result": "invalid locale"}
 
-11. There was also going to be a simple ajax form that calls the REST API, but I ran out of time.  Sorry!
+11.  And finally, our translation machine comes to life in a simple ajax form.  Navigate to 
+localhost:8888 in your browser.  Be a little patient, as the first call can sometime take a 
+few seconds.  Tested on recent Firefox/Chrome/Safari in OS X.
+
+Oh, and please don't make fun of my terrible HTML.
